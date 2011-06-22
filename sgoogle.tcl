@@ -1,6 +1,6 @@
 #  ----------------------------------------------------------
 #  
-#   SGoogle v 0.9.9.6.2
+#   SGoogle v 0.9.9.7
 #   Author: samu (IRC: samu@pirc.pl)
 #
 #  ----------------------------------------------------------
@@ -75,7 +75,7 @@ proc pub:google { nick uhost handle channel arg } {
 	    } else {
 		    putquick "NOTICE $nick :\002\[GOOGLE\]\002 szukam -> $arg"
 		    set arg [http::formatQuery $arg]
-		    set query "http://www.google.pl/custom?q=$arg"
+		    set query "http://www.google.pl/search?q=$arg"
 	            set token [http::config -useragent $agent]
 		    set title [http::data [set token [http::geturl $query -timeout 2000]]]
 		    set title [string map {"\n" "" "\t" ""} $title]
@@ -85,7 +85,7 @@ proc pub:google { nick uhost handle channel arg } {
                     #regexp -nocase {<a class="l" href="(.*?)"} $title -> newurl
                     #set reg "\\(this, '$newurl'\\)\">(.*?)</a>";
                     #regexp -nocase $reg $title -> title2
-                    regexp -nocase {<li><div class=g><a href="([^\"].*?)" class=l>([^,].*?)</a>} $result -> newurl title2
+                    regexp -nocase {<a href="([^"]+)" class=l onmousedown=[^>]+>([^<]+)<} $result -> newurl title2
 
 		    #if { [info exists title2] } {
 		        #set title2 [string map {"<em>" "\002\037" "</em>" "\037\002" "<b>...</b>" ""} $title2]
