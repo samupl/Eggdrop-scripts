@@ -1,6 +1,6 @@
 #  ----------------------------------------------------------
 #  
-#   SGoogle v 0.9.9.7
+#   SGoogle v 0.9.9.7.1
 #   Author: samu (IRC: samu@pirc.pl)
 #
 #  ----------------------------------------------------------
@@ -59,14 +59,13 @@ bind pub - !google pub:google
 #
 #  ----------------------------------------------------------
 
-set ver "0.9.9.6.2"
-set agent "Mozilla"
+set ver "0.9.9.7.1"
+set agent "Mozilla/5.0 (X11; FreeBSD i386; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
 setudef flag sgoogle
 
 proc pub:google { nick uhost handle channel arg } {
     global agent
     global debug
-    set agent "Mozilla"
     if {![channel get $channel sgoogle]} {
         putlog "Flag is not enabled for $channel"
     } else {
